@@ -1,0 +1,12 @@
+# 교육기관 배포 자료(공개 저장소에 올리지 않음)
+*.pdf
+
+# 비밀값
+.env
+*.pem
+*.key
+
+# 운영체제·편집기 부산물
+.DS_Store
+Thumbs.db
+.vscode/
