@@ -1,0 +1,39 @@
+$ docker volume create mydata
+mydata
+
+$ docker volume ls --filter name=mydata
+DRIVER    VOLUME NAME
+local     mydata
+
+$ docker run -d --name vol-test -v mydata:/data ubuntu:24.04 sleep infinity
+3a9d217f399022ab40f4e67648b50cff96036491045b0e52e43bf1596c2595d1
+
+$ docker exec vol-test bash -c "echo hi-volume > /data/hello.txt && cat /data/hello.txt"
+hi-volume
+
+# 컨테이너 삭제
+$ docker rm -f vol-test
+vol-test
+
+$ docker ps -a --filter name=vol-test --format "{{.Names}}"
+
+# 새 컨테이너에 같은 볼륨 연결
+$ docker run -d --name vol-test2 -v mydata:/data ubuntu:24.04 sleep infinity
+37cd2a6c6880939b7e9a1c5ffa5c5c79517e8264fe6ff30c28b9ecf9162536e4
+
+$ docker exec vol-test2 cat /data/hello.txt
+hi-volume
+
+$ docker volume inspect mydata
+[
+    {
+        "CreatedAt": "2026-11-05T16:28:29Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/mydata/_data",
+        "Name": "mydata",
+        "Options": null,
+        "Scope": "local"
+    }
+]
+

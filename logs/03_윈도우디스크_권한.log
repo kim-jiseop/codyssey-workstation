@@ -1,0 +1,28 @@
+# 1) 윈도우 디스크 위의 파일
+$ pwd
+/mnt/c/Users/LG/Documents/코디세이
+
+$ touch ntfs_test.txt
+
+$ stat -c "%A %a %n" ntfs_test.txt
+-rwxrwxrwx 777 ntfs_test.txt
+
+$ chmod 600 ntfs_test.txt
+
+$ stat -c "%A %a %n" ntfs_test.txt
+-rwxrwxrwx 777 ntfs_test.txt
+
+$ mount | grep " /mnt/c "
+C:\ on /mnt/c type 9p (rw,noatime,aname=drvfs;path=C:\;uid=1000;gid=1000;symlinkroot=/mnt/,cache=0x5,access=client,msize=65536,trans=fd,rfd=12,wfd=12)
+
+# 2) 리눅스 디스크 위의 파일
+$ cd ~ && touch ext4_test.txt
+
+$ stat -c "%A %a %n" ext4_test.txt
+-rw-r--r-- 644 ext4_test.txt
+
+$ chmod 600 ext4_test.txt
+
+$ stat -c "%A %a %n" ext4_test.txt
+-rw------- 600 ext4_test.txt
+

@@ -1,0 +1,20 @@
+$ cat bind-demo/index.html
+<h1>BEFORE: bind mount</h1>
+
+$ docker run -d -p 8082:80 --name bind-test -v "C:/Users/LG/Documents/코디세이/bind-demo:/usr/share/nginx/html" nginx:1.27-alpine
+625cbeb338a9eec793560ad2d7c65762ff76f61b0e0d8ecef2507c3bf1cab600
+
+# 변경 전
+$ curl -s http://localhost:8082
+<h1>BEFORE: bind mount</h1>
+
+# 호스트에서 파일만 고침(컨테이너는 그대로)
+$ echo "<h1>AFTER: changed on host</h1>" > bind-demo/index.html
+
+# 변경 후
+$ curl -s http://localhost:8082
+<h1>AFTER: changed on host</h1>
+
+$ docker exec bind-test cat /usr/share/nginx/html/index.html
+<h1>AFTER: changed on host</h1>
+

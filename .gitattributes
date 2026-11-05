@@ -1,0 +1,4 @@
+# 셸 스크립트·Dockerfile·설정은 리눅스 줄바꿈(LF)으로 고정 — CRLF 면 bash 가 오류를 냄
+*.sh        text eol=lf
+Dockerfile  text eol=lf
+*.conf      text eol=lf

@@ -1,0 +1,91 @@
+$ pwd
+/home/gogosing
+
+$ mkdir -p ~/codyssey/practice
+
+$ cd ~/codyssey/practice
+
+$ pwd
+/home/gogosing/codyssey/practice
+
+$ ls -la
+total 8
+drwxr-xr-x 2 gogosing gogosing 4096 Nov  6 01:26 .
+drwxr-xr-x 3 gogosing gogosing 4096 Nov  6 01:26 ..
+
+$ touch empty.txt
+
+$ echo "hello codyssey" > memo.txt
+
+$ mkdir docs
+
+$ ls -la
+total 16
+drwxr-xr-x 3 gogosing gogosing 4096 Nov  6 01:26 .
+drwxr-xr-x 3 gogosing gogosing 4096 Nov  6 01:26 ..
+drwxr-xr-x 2 gogosing gogosing 4096 Nov  6 01:26 docs
+-rw-r--r-- 1 gogosing gogosing    0 Nov  6 01:26 empty.txt
+-rw-r--r-- 1 gogosing gogosing   15 Nov  6 01:26 memo.txt
+
+$ cat memo.txt
+hello codyssey
+
+$ cp memo.txt docs/memo_copy.txt
+
+$ mv docs/memo_copy.txt docs/memo_renamed.txt
+
+$ mv empty.txt docs/
+
+$ ls -la docs
+total 12
+drwxr-xr-x 2 gogosing gogosing 4096 Nov  6 01:26 .
+drwxr-xr-x 3 gogosing gogosing 4096 Nov  6 01:26 ..
+-rw-r--r-- 1 gogosing gogosing    0 Nov  6 01:26 empty.txt
+-rw-r--r-- 1 gogosing gogosing   15 Nov  6 01:26 memo_renamed.txt
+
+$ echo ".secret_note" > .hidden_file
+
+$ ls
+docs
+memo.txt
+
+$ ls -a
+.
+..
+.hidden_file
+docs
+memo.txt
+
+$ rm docs/empty.txt
+
+$ ls -la docs
+total 12
+drwxr-xr-x 2 gogosing gogosing 4096 Nov  6 01:26 .
+drwxr-xr-x 3 gogosing gogosing 4096 Nov  6 01:26 ..
+-rw-r--r-- 1 gogosing gogosing   15 Nov  6 01:26 memo_renamed.txt
+
+$ cd docs
+
+$ pwd
+/home/gogosing/codyssey/practice/docs
+
+$ cat ../memo.txt
+hello codyssey
+
+$ cat ~/codyssey/practice/memo.txt
+hello codyssey
+
+$ cd ..
+
+$ mkdir -p trash/sub && touch trash/sub/a.txt
+
+$ rm -r trash
+
+$ ls -la
+total 20
+drwxr-xr-x 3 gogosing gogosing 4096 Nov  6 01:26 .
+drwxr-xr-x 3 gogosing gogosing 4096 Nov  6 01:26 ..
+-rw-r--r-- 1 gogosing gogosing   13 Nov  6 01:26 .hidden_file
+drwxr-xr-x 2 gogosing gogosing 4096 Nov  6 01:26 docs
+-rw-r--r-- 1 gogosing gogosing   15 Nov  6 01:26 memo.txt
+

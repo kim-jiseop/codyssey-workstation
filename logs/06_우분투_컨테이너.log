@@ -1,0 +1,53 @@
+# 1) 일회성 실행: 명령이 끝나면 컨테이너도 끝남
+$ docker run --rm ubuntu:24.04 bash -c "ls / && echo hello from ubuntu && cat /etc/os-release | head -2"
+bin
+boot
+dev
+etc
+home
+lib
+lib64
+media
+mnt
+opt
+proc
+root
+run
+sbin
+srv
+sys
+tmp
+usr
+var
+hello from ubuntu
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+NAME="Ubuntu"
+
+# 2) exec: 실행 중인 컨테이너에 '새 프로세스'로 들어감 -> 나와도 컨테이너는 계속 실행
+$ docker run -dit --name ubuntu-exec ubuntu:24.04 bash
+56d1388b346a63c2060ef8363b4ad2ed34bf5374473f24b161a3313cdfc1d62a
+
+$ docker exec ubuntu-exec bash -c "echo inside exec && ls /home && exit"
+inside exec
+ubuntu
+
+$ docker ps --filter name=ubuntu-exec --format "{{.Names}}: {{.Status}}"
+ubuntu-exec: Up 1 second
+
+# 3) attach: 컨테이너의 '메인 프로세스(PID 1)'에 붙음 -> exit 하면 컨테이너가 멈춤
+$ docker run -di --name ubuntu-attach ubuntu:24.04 bash
+dab3fabe4d03be58463b3fd507965f0d1ef4e16e285291ba161b575473f2d33d
+
+$ echo "echo inside attach; exit" | docker attach ubuntu-attach
+
+$ docker ps -a --filter name=ubuntu-attach --format "{{.Names}}: {{.Status}}"
+ubuntu-attach: Exited (0) Less than a second ago
+
+# 4) 중지 후 상태 확인
+$ docker stop ubuntu-exec
+ubuntu-exec
+
+$ docker ps -a --filter name=ubuntu --format "{{.Names}}: {{.Status}}"
+ubuntu-attach: Exited (0) 4 seconds ago
+ubuntu-exec: Exited (137) Less than a second ago
+
